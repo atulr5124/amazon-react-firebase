@@ -1,11 +1,18 @@
 import React from 'react'
 import './CheckoutProduct.css'
 import numeral from 'numeral'
+import { useStateValue } from './StateProvider'
 
 function CheckoutProduct({id,title,image,price,rating}) {
 
-    const removeFromCart = () => {
+    const [{basket}, dispatch] = useStateValue()
 
+    const removeFromCart = () => {
+        // remove item from cart...
+        dispatch({
+            type:'REMOVE_FROM_CART',
+            id: id
+        })
     }
 
     return (
