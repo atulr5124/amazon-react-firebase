@@ -9,12 +9,16 @@ cart?.reduce((amount, item) => item.price + amount, 0)
 
 const reducer = (state, action) => {
     switch (action.type) {
+        case 'SET_USER':
+            return {
+                ...state, 
+                user: action.user
+            }
         case 'ADD_TO_CART':
             return {
                 ...state,
                 cart: [...state.cart, action.item]
             }
-            break
         case 'REMOVE_FROM_CART':
             let newCart = [...state.cart]
             const index = state.cart.findIndex((cartItems) => cartItems.id === action.id)
@@ -25,7 +29,6 @@ const reducer = (state, action) => {
                 console.warn(`Cant remove product (id: ${action.id}) as its not in your cart`)
             }
             return { ...state, cart: newCart }
-            break
         default:
             return state
     }
